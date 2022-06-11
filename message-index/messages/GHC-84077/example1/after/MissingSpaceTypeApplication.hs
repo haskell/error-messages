@@ -1,6 +1,6 @@
 {-# LANGUAGE TypeApplications, RankNTypes #-}
 
-module MissingSpaceTypeOperator where
+module MissingSpaceTypeApplication where
 
 f :: (forall a. a -> b) -> (Int -> b)
 f x = x @Int

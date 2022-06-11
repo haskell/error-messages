@@ -1,5 +1,5 @@
 ---
-title: Missing space before type operator
+title: Missing space before type application
 ---
 
 There is no space before the type application `@Int`.
