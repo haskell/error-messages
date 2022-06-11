@@ -47,6 +47,7 @@ title: Unification Error
 summary: Two types that should match are in conflict
 introduced: 9.4.1
 severity: error
+ghc-flag: "-Wunification"
 ---
 
 
@@ -64,6 +65,7 @@ The fields in the metadata block should be:
  * `title` - a short title used for the page header and for links to the description
  * `summary` - a short summary used in the message index
  * `introduced` - the tool version in which the error code was introduced (optional)
+ * `ghc-flag` - the GHC flag used to enable the warning (optional/only if applicable)
 
 ### Example Descriptions
 Example descriptions are written in Markdown with Pandoc-style
