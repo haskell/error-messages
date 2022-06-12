@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|B612|B612+Mono&display=swap");
 html {
   font-size: 62.5%;
 }
@@ -79,7 +80,6 @@ article .header {
     line-height: 1.6;
   }
 }
-
 @media (min-width: 320px) {
   body {
     width: 90%;
@@ -108,7 +108,6 @@ article .header {
     margin: 0 0.6rem;
   }
 }
-
 @media (min-width: 640px) {
   body {
     width: 120rem;
@@ -127,29 +126,25 @@ article .header {
     margin: 0 0 0 1.2rem;
     display: inline;
   }
-
   footer .foot {
     height: 50px;
     line-height: 50px;
   }
-
   footer .shoutout {
     display: inline-block;
     float: right;
     text-align: right;
   }
-
   footer .HF {
     display: inline-block;
     float: left;
     text-align: left;
     background-repeat: no-repeat;
-    background-image: url('../images/hf-logo.png');
+    background-image: url("../images/hf-logo.png");
     background-size: 50px;
     background-position: left center;
     padding-left: 60px;
   }
-
   .logo {
     margin: 0;
     text-align: left;
@@ -159,7 +154,6 @@ article .header {
     font-size: 1.8rem;
   }
 }
-
 .example {
   display: inline-block;
   width: 45%;
@@ -207,3 +201,14 @@ nav#breadcrumb a {
 table pre {
   margin: 0;
 }
+
+tr.message td:not(.summary), code {
+  font-family: "B612 Mono", monospace;
+  font-size: 0.8em;
+}
+
+tr.message td:last-child {
+  text-align: right;
+}
+
+/*# sourceMappingURL=default.css.map */

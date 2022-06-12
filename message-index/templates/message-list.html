@@ -1,10 +1,10 @@
 <table>
     <tr><th>Nr.</th><th>Message</th><th>Summary</th><th>Introduced</th></tr>
     $for(messages)$
-        <tr>
+        <tr class="message">
             <td>$id$</td>
             <td><a href="$url$">$title$</a></td>
-            <td>$summary$</td>
+            <td class="summary">$summary$</td>
             <td>$introduced$</td>
         </tr>
     $endfor$
