@@ -1,6 +1,6 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# OPTIONS_GHC -Wambiguous-fields #-}
-module Error where
+module Example where
 
 data R1 = MkR1 { x :: Int }
 
