@@ -1,0 +1,9 @@
+{
+  "name": "ghc-error-messages",
+  "devDependencies": {
+    "sass": "^1.52.3"
+  },
+  "scripts": {
+    "style": "sass app.sass:css/default.css --load-path ./node_modules"
+  }
+}

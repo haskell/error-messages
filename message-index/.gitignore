@@ -5,3 +5,4 @@
 /.stack-work
 *.hi
 *.o
+/node_modules/
