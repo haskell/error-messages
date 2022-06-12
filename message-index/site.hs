@@ -5,6 +5,7 @@
 
 import qualified Data.Aeson as JSON
 import qualified Data.Aeson.KeyMap as KM
+import Data.Bifunctor (bimap)
 import Data.Binary (Binary)
 import Data.Data (Typeable)
 import Data.Functor ((<&>))
@@ -17,6 +18,7 @@ import Data.Traversable
 import Hakyll
 import Lens.Micro (_1, _2, _3)
 import Lens.Micro.Extras (view)
+import qualified Patience as Patience
 import System.FilePath
 import Text.Pandoc.Definition (Meta (..), MetaValue (..), Pandoc (..))
 
@@ -221,3 +223,12 @@ getMsgId = do
     ["messages", code, "index.html"] -> pure (Just code)
     ["messages", code, "index.md"] -> pure (Just code)
     _ -> pure Nothing
+
+-- | Render a 'Patience.diff' into two strings, to be displayed side-by-side.
+renderColumnDiff :: [Patience.Item String] -> (String, String)
+renderColumnDiff =
+  bimap unlines unlines . unzip . fmap thing
+ where
+  thing (Patience.Old left) = ("-" ++ left, "")
+  thing (Patience.New right) = ("", "+" ++ right)
+  thing (Patience.Both left right) = (left, right)
