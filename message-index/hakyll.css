@@ -166,8 +166,6 @@ article .header {
 }
 
 main pre code {
-  background-color: #fafafa;
-  font-family: monospace;
   display: inline-block;
   padding: 10px;
 }
