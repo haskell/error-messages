@@ -1,9 +1,9 @@
 ---
-title: Ambiguous record update (single module)
+title: Ambiguous record update (multiple modules)
 ---
 
 Both records `R1` and `R2` share the same field `x`. For this reason, the compiler cannot infer a type for the record update `r { x = 1 }`.
-If both records are declared in the same module, then the forward compatible way to solve this error is to rename one of the fields.
+If the records are defined in separate modules, then the forward compatible way to solve this error is to use fully qualified field names.
 
 ## Error Message
 
