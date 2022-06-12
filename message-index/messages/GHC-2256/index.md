@@ -3,7 +3,7 @@ title: Ambiguous record update
 summary: Deprecated use of type directed name resolution.
 severity: warning
 flag: "-Wambiguous-fields"
-extension: "DuplicateRecordFields"
+extension: DuplicateRecordFields
 introduced: 9.6.1
 ---
 
