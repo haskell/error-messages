@@ -1,6 +1,6 @@
 ---
-title: Impossible Record Update
-summary: No type contains all the given fields
+title: Impossible record update
+summary: No type contains all the given fields.
 severity: error
 introduced: 9.6.1
 ---

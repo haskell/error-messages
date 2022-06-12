@@ -1,6 +1,6 @@
 ---
 title: Ambiguous record update
-summary: Cannot infer correct type for record update
+summary: Cannot infer correct type for record update.
 severity: error
 introduced: 9.6.1
 ---
