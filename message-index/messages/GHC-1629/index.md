@@ -1,6 +1,6 @@
 ---
 title: Too many type arguments in constructor pattern
-summary: You have applied to many types to a constructor in a pattern.
+summary: Too many type applications to a constructor in a pattern.
 severity: error
 introduced: 9.6.1
 ---
