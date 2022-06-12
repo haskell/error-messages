@@ -2,6 +2,7 @@
 title: Ambiguous record update
 summary: Cannot infer correct type for record update.
 severity: error
+extension: DuplicateRecordFields
 introduced: 9.6.1
 ---
 
