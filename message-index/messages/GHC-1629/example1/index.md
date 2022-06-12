@@ -2,6 +2,8 @@
 title: Too many type arguments in constructor pattern
 ---
 
+The `@Bool` is too much in this example.  There is nothing to bind to it, so it is not allowed to be there.
+
 ## Error Message
 
 ```
