@@ -71,6 +71,15 @@ No executables found.
 ```
 typically indicate that the site was started from the root of the repository, rather than the `message-index` directory.
 
+### Styling
+
+If modifying any of the source `*.css` or `*.sass` files, regenerate the stylesheet `css/default.css` by running:
+
+```
+$ pnpm install
+$ pnpm run style
+```
+
 ### Maintenance
 
 The Message Index is a project of the [Haskell Foundation](http://haskell.foundation). Please get in touch if you have ideas, requests, or any other feedback!
