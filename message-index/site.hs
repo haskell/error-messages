@@ -172,7 +172,7 @@ messageTitleField = field "title" getTitle
       let msgId = getIdentId ident
       case KM.lookup "title" metas of
         (Just (JSON.String (T.unpack -> str))) -> do
-          pure $ maybe str ((str ++) . (" [" ++) . (++ "]")) msgId
+          pure $ maybe str (("<code>" ++) . (str ++) . (" [" ++) . (++ "]</code>")) msgId
         Just other -> fail $ "Not a string: " ++ show other
         Nothing -> pure ""
 
