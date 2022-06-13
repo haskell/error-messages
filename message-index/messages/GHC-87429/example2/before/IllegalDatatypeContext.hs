@@ -1,3 +1,3 @@
 module IllegalDatatypeContext where
 
-data (Show a) => D a = D a
+data (Show a, Read a) => D a = D a
