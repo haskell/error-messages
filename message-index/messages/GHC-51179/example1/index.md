@@ -10,6 +10,6 @@ error: [GHC-51179]
     Illegal \case
     Suggested fix: Perhaps you intended to use LambdaCase
   |
-3 | f = \case "1" -> 1
+3 | f = \case {"1" -> 1; "2" -> 2}
   |      ^^^^
 ```

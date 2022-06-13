@@ -6,7 +6,7 @@ introduced: 9.6.1
 extension: LambdaCase
 ---
 
-[Lambda Case](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/lambda_case.html)
+The [Lambda Case extension](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/lambda_case.html)
 enables a syntactic sugar for a lambda function that pattern matches its argument immediately.
 Using `LambdaCase`,
 ```
