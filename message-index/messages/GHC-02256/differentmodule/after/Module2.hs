@@ -1,7 +1,7 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 module Module2 where
 
-import Module1 ( R1(x) )
+import Module1
 
 data R2 = MkR2 { x :: Int }
 
