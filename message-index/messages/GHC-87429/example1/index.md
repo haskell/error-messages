@@ -1,5 +1,5 @@
 ---
-title: Illegal datatype context
+title: Illegal datatype context, fixed with GADTs
 ---
 
 In this example, we wish to constrain the type `a` which can parameterise the type `D` to a type that implements the `Show` and `Read` typeclasses. Whilst this can be solved currently by `-XDatatypeContexts`, this extension is deprecated.
