@@ -4,8 +4,11 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex">
         <title>$title$ — Haskell Error Index</title>
         <link rel="stylesheet" href="/css/default.css" />
+        <link rel="stylesheet" href="/css/highlight.css">
+        <script src="/js/highlight.min.js"></script>
     </head>
     <body>
         <header>
@@ -39,5 +42,9 @@
             <a href="http://jaspervdj.be/hakyll">Hakyll</a>
           </p>
         </footer>
+
+        <script>document.querySelectorAll('code.language-haskell').forEach(el => {
+          hljs.highlightElement(el);
+        });</script>
     </body>
 </html>
