@@ -3,5 +3,6 @@
 /_cache/
 /_site/
 /.stack-work
+bin/
 *.hi
 *.o
