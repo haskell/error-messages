@@ -7,7 +7,7 @@ extension: LambdaCase
 ---
 
 [Lambda Case](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/lambda_case.html)
-is a syntactic sugar for a lambda function which only operation is a pattern matching.
+enables a syntactic sugar for a lambda function that pattern matches its argument immediately.
 ```
 \case {"1" -> 1, "2" -> 2}
 ```
