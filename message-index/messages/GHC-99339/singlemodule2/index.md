@@ -1,9 +1,9 @@
 ---
-title: Ambiguous record update (single module, renaming)
+title: Ambiguous record update (single module, case expression)
 ---
 
 Both records `R1` and `R2` share the same field `x`. For this reason, the compiler cannot infer a type for the record update `r { x = 1 }`.
-If both records are declared in the same module, then the forward compatible way to solve this error is to rename one of the fields.
+If both records are declared in the same module, you can use a case expression instead of a record update.
 
 ## Error Message
 
