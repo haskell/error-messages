@@ -4,20 +4,24 @@
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE ViewPatterns #-}
 
+import Control.Applicative (Alternative (..))
 import qualified Data.Aeson as JSON
 import qualified Data.Aeson.KeyMap as KM
+import Data.Align (padZipWith)
+import Data.Bifunctor (second)
 import Data.Binary (Binary)
 import Data.Data (Typeable)
 import Data.Functor ((<&>))
 import Data.List (find, lookup, nub, sort)
 import qualified Data.Map.Strict as Map
-import Data.Maybe (fromMaybe, listToMaybe, mapMaybe)
+import Data.Maybe (fromMaybe, isJust, listToMaybe, mapMaybe)
 import Data.Monoid (mappend)
 import qualified Data.Text as T
 import Data.Traversable
 import Hakyll
 import Lens.Micro (_1, _2, _3)
 import Lens.Micro.Extras (view)
+import qualified Patience as Patience
 import System.FilePath
 import Text.Pandoc.Definition (Meta (..), MetaValue (..), Pandoc (..))
 
@@ -79,9 +83,7 @@ main = hakyll $ do
                   "files"
                   ( mconcat
                       [ urlField "url",
-                        field "name" (pure . view _1 . itemBody),
-                        field "before" (maybe (pure "<not present>") (fmap itemBody . load . itemIdentifier) . view _2 . itemBody),
-                        field "after" (maybe (pure "<not present>") (fmap itemBody . load . itemIdentifier) . view _3 . itemBody)
+                        field "diff" $ fmap itemBody . renderDiff
                       ]
                   )
                   (return files),
@@ -185,7 +187,7 @@ getExamples = do
     other -> fail $ "Not processing a message: " ++ show other
   loadAll $ fromGlob ("messages/" <> code <> "/*/index.*") .&&. hasNoVersion
 
-getExampleFiles :: Compiler [Item (FilePath, Maybe (Item String), Maybe (Item String))]
+getExampleFiles :: Compiler [Item (FilePath, [DiffRow String])]
 getExampleFiles = do
   me <- getUnderlying
   (id, exampleName) <- case splitDirectories $ toFilePath me of
@@ -196,14 +198,14 @@ getExampleFiles = do
   after <- loadAll (fromGlob ("messages/" <> id <> "/" <> exampleName <> "/after/*.hs") .&&. hasVersion "raw")
   let allNames = sort $ nub $ map (takeFileName . toFilePath . itemIdentifier) $ before ++ after
   pure $
-    [ Item
-        (fromFilePath name)
-        ( name,
-          find ((== name) . takeFileName . toFilePath . itemIdentifier) before,
-          find ((== name) . takeFileName . toFilePath . itemIdentifier) after
-        )
-      | name <- allNames
+    [ Item (fromFilePath name) (name, diffTable)
+      | name <- allNames,
+        let beforeContent = fromMaybe "" $ itemBody <$> findByName name before,
+        let afterContent = fromMaybe "" $ itemBody <$> findByName name after,
+        let diffTable = sectionsToRows $ diffLines beforeContent afterContent
     ]
+  where
+    findByName name = find $ (== name) . takeFileName . toFilePath . itemIdentifier
 
 lookupBy :: (a -> Maybe b) -> [a] -> Maybe b
 lookupBy f = listToMaybe . mapMaybe f
@@ -243,3 +245,66 @@ flagSetFields =
           Just (_, g) -> return $ unwords g
           Nothing -> return ""
     ]
+
+data DiffSection a
+  = Unchanged [a] [a]
+  | Replace [a] [a]
+  deriving (Show)
+
+-- FIXME: use "hunk" instead of "section", that's Git's terminology
+lineDiffToSections :: [Patience.Item a] -> [DiffSection a]
+lineDiffToSections = foldr go []
+  where
+    go item sections@(Replace from to : rest) =
+      case item of
+        Patience.Old x ->
+          Replace (x : from) to : rest
+        Patience.New x ->
+          Replace from (x : to) : rest
+        otherItem ->
+          newSection otherItem : sections
+    go item sections@(Unchanged ls rs : rest) =
+      case item of
+        Patience.Both l r ->
+          Unchanged (l : ls) (r : rs) : rest
+        otherItem ->
+          newSection otherItem : sections
+    go item [] =
+      [newSection item]
+
+    newSection (Patience.Old x) = Replace [x] []
+    newSection (Patience.New x) = Replace [] [x]
+    newSection (Patience.Both l r) = Unchanged [l] [r]
+
+diffLines :: String -> String -> [DiffSection String]
+diffLines old new = lineDiffToSections $ Patience.diff (lines old) (lines new)
+
+-- | A format for diffs that's easier to use in Hakyll templates.
+type DiffRow a = (Bool, Maybe a, Maybe a)
+
+sectionsToRows :: [DiffSection a] -> [DiffRow a]
+sectionsToRows =
+  concatMap $ \case
+    Unchanged ls rs ->
+      zipWith (\l r -> (False, Just l, Just r)) ls rs
+    Replace from to ->
+      padZipWith (\l r -> (True, l, r)) from to
+
+renderDiff :: Item (FilePath, [DiffRow String]) -> Compiler (Item String)
+renderDiff item@(Item ident (name, rows)) =
+  loadAndApplyTemplate
+    "templates/diff.html"
+    ( mconcat
+        [ field "name" (pure . view _1 . itemBody),
+          listField
+            "rows"
+            ( mconcat
+                [ boolField "changed" $ view _1 . itemBody,
+                  field "left" $ maybe empty pure . view _2 . itemBody,
+                  field "right" $ maybe empty pure . view _3 . itemBody
+                ]
+            )
+            (pure $ map (Item (setVersion (Just "diff") ident)) rows)
+        ]
+    )
+    item
