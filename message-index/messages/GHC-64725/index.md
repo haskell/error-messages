@@ -8,7 +8,7 @@ severity: error
 Errors like this usually come from libraries trying to enforce certain
 rules about the types they work with, or to improve upon a compiler error that
 would occur otherwise. It is up to the library authors to provide enough
-information in the embedded error message to fix the failing program, check
+information in the embedded error message to fix the failing program—check
 the documentation for the function that triggered the error for more
 information.
 These errors are constructed using `GHC.TypeLits.TypeError` applied to a type
