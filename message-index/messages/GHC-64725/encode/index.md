@@ -1,12 +1,12 @@
 ---
-title: Cannot Encode arbitrary precision integers
+title: Cannot encode arbitrary precision integers
 ---
 
 ## Error Message
 
 ```
 Main1.hs:9:18: error: [GHC-64725]
-    • Cannot Encode arbitrary precision integers.
+    • Cannot encode arbitrary precision integers.
       Consider using a fixed size representation.
     • In the expression: encode myValue
       In an equation for ‘myEncodedValue’:

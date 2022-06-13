@@ -23,6 +23,6 @@ instance Encode Word
 
 instance (Encode a, Encode b) => Encode (a, b)
 
-instance TypeError (Text "Cannot Encode arbitrary precision integers." :$$:
+instance TypeError (Text "Cannot encode arbitrary precision integers." :$$:
                     Text "Consider using a fixed size representation.")
     => Encode Integer

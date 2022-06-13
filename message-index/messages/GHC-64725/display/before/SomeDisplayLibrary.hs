@@ -20,7 +20,7 @@ instance Display Int where
 instance (Display a, Display b) => Display (a, b) where
   display (a, b) = "(" <> display a <> ", " <> display b <> ")"
 
-instance TypeError (Text "Cannot Display functions." :$$:
-                    Text "Perhaps there is a missing arguments?")
+instance TypeError (Text "Cannot display functions." :$$:
+                    Text "Perhaps there are missing arguments?")
     => Display (a -> b) where
   display = error "unreachable: instance Display (a -> b)"
