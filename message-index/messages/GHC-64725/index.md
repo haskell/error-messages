@@ -1,7 +1,7 @@
 ---
 title: User-defined type error
 summary: An invalid constraint or type family reduces to a custom type error.
-introduced: 8.0.1
+introduced: 9.6.1
 severity: error
 ---
 
