@@ -12,7 +12,7 @@ Using `LambdaCase`,
 ```
 \case {"1" -> 1, "2" -> 2}
 ```
-in lambda case notation is equivalent to
+is equivalent to
 ```
 \x -> case x of {"1" -> 1, "2" -> 2}
 ```
