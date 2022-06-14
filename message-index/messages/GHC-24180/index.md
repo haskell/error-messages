@@ -1,5 +1,5 @@
 ---
-title: Too few arguments to type operator
+title: Too few arguments to infix type operator
 summary: A type operator was not provided with both arguments.
 severity: warning
 extension: TypeOperators
