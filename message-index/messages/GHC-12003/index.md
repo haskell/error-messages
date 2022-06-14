@@ -1,6 +1,6 @@
 ---
 title: Type equality not in scope
-summary: The type equality operator has not been imported into the current module
+summary: The type equality operator has not been imported into the current module.
 severity: warning
 flag: "-Wcompat"
 introduced: 9.6.1
