@@ -1,3 +1,3 @@
 module BiDi where
 
--- This comment contains bidirectional format chars
+-- This comment no longer contains bidirectional format chars
